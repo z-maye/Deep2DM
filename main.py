@@ -20,7 +20,7 @@ class Stats:
     model_dic = {'Boron Nitride': 'bn_mask_rcnn_tdm_120.h5', 'Graphene': 'graphene_mask_rcnn_tdm_0120.h5', 'Mos2': 'mos2_mask_rcnn_tdm_0120.h5', 'Wte2': 'wte2_mask_rcnn_tdm_0071.h5'}
     def __init__(self):
         # Load UI definition from file
-        self.ui = uic.loadUi("./qt/2Dmmd.ui")
+        self.ui = uic.loadUi("./qt/Deep2DM.ui")
         self.ui.comboBox.currentIndexChanged.connect(self.choose_model)
         self.ui.Button_1.clicked.connect(self.choose_image)
         self.ui.Button_2.clicked.connect(self.opt)
