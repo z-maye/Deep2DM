@@ -1,91 +1,94 @@
 # Deep2DM
 
-> 面向二维材料光学显微图像的智能检测与实例分割桌面软件
+> A desktop application for intelligent detection and instance segmentation of two-dimensional materials in optical microscopy images.
 
-Deep2DM是一个基于 **Mask R-CNN** 与 **PyQt5** 的图形化检测系统。软件面向沉积在 **SiO₂/Si 基底**上的剥离二维材料光学显微图像，可自动定位目标、生成像素级实例分割掩膜、标注置信度，并统计不同层数区间的样品数量。
+Deep2DM is a graphical detection system built with **Mask R-CNN** and **PyQt5**. It is designed for optical microscopy images of exfoliated two-dimensional materials on **SiO₂/Si substrates**. The application locates material targets, generates pixel-level instance masks, displays confidence scores, and counts samples across thickness ranges.
 
-| 项目 | 信息                                      |
-| --- |-----------------------------------------|
-| 当前代码版本 | V1.00                                   |
-| 编程语言 | Python                                  |
-| 核心框架 | Mask R-CNN、TensorFlow 1.x、PyQt5         |
-| 代码仓库 | <https://github.com/1286250607/Deep2DM> |
+| Item | Details |
+| --- | --- |
+| Current version | V1.00 |
+| Language | Python |
+| Core components | Mask R-CNN, TensorFlow 1.x, PyQt5 |
+| Repository | <https://github.com/1286250607/2Dmmd> |
+| Intended users | 2D-material research, laboratory teaching, and initial microscopy-image screening |
 
-## 为什么选择Deep2DM？
+## Why Deep2DM?
 
-二维材料的层数、形貌和边界会直接影响其物理性质与器件性能。常规人工筛选不仅耗时，也容易受观察经验、照明、基底杂质和胶带残留等因素影响。Deep2DM 将图像上传、材料选择、模型推理、可视化与结果导出整合到一个桌面界面中，减少手动调用模型和重复调参的工作量。
+The thickness, morphology, and boundaries of two-dimensional materials directly affect their physical properties and device performance. Manual screening is time-consuming and can be affected by user experience, illumination, substrate texture, and adhesive residues. Deep2DM brings image upload, material selection, detection, visualization, and result export together in one desktop interface, reducing repetitive manual work.
 
-## 主要功能
+## Key Features
 
-- **图像上传**：支持 PNG、JPG、JPEG、BMP 格式的本地图像。
-- **材料选择**：内置 Boron Nitride、Graphene、MoS₂、WTe₂ 四类材料对应的模型入口。
-- **智能识别**：使用 Mask R-CNN 输出检测框、置信度、实例分割掩膜和层数类别。
-- **厚度统计**：同步统计单层（Mono）、少层（Few，2–10 层）和厚层（Thick，10–40 层）目标数量。
-- **结果对比**：界面并排显示原始图像与带标注的检测图。
-- **结果保存**：一键将标注后的检测结果保存到用户指定位置。
+- **Image upload**: Supports local PNG, JPG, JPEG, and BMP image files.
+- **Material selection**: Provides configured entries for Boron Nitride, Graphene, MoS₂, and WTe₂.
+- **Intelligent detection**: Produces bounding boxes, confidence scores, instance segmentation masks, and thickness categories.
+- **Thickness statistics**: Counts monolayer (Mono), few-layer (Few, 2–10 layers), and thick-layer (Thick, 10–40 layers) targets.
+- **Side-by-side comparison**: Displays the original image and its annotated result together.
+- **Result export**: Saves the annotated detection image to a user-selected location.
 
-![Deep2DM 主界面：左侧为原图，右侧为检测结果和统计信息](docs/images/interface-overview.png)
+![Deep2DM main interface: original image on the left and detection result on the right](docs/images/interface-overview.png)
 
-## 软件功能
+## Software Functions
 
-1. **材料选择**：在下拉菜单中选择目标材料，软件据此调用对应的已配置权重文件。
-2. **图像导入**：通过文件选择窗口导入待检测的本地显微图像，并在左侧预览原图。
-3. **结果展示**：检测完成后，右侧显示带边界框、厚度类别和置信度的结果图；下方同步列出权重文件、材料名称及数量统计。
-4. **结果导出**：将当前标注图保存到用户指定目录，便于实验记录和后续查阅。
+The Deep2DM graphical interface provides the following functions:
 
-## 项目结构
+1. **Select material**: Select the target material from the drop-down menu. The application then uses its corresponding configured weight file.
+2. **Import image**: Use the file dialog to import a local microscopy image and preview it on the left.
+3. **View results**: After detection, the right panel shows an annotated image with bounding boxes, thickness categories, and confidence scores. The lower panel lists the weight file, material name, and counts.
+4. **Export result**: Save the current annotated image to a selected directory for experiment records and later review.
+
+## Project Structure
 
 ```text
 Deep2DM/
-├── main.py                 # PyQt5 图形界面与程序入口
-├── detect.py               # 权重加载、图像推理与结果绘制
-├── requirments.txt         # Python 依赖（保留仓库原有拼写）
-├── mrcnn/                  # Mask R-CNN 实现
-├── qt/Deep2DM.ui           # Qt Designer 界面文件
+├── main.py                 # PyQt5 graphical interface and application entry point
+├── detect.py               # Weight loading, image inference, and result rendering
+├── requirments.txt         # Python dependencies (original filename retained)
+├── mrcnn/                  # Mask R-CNN implementation
+├── qt/Deep2DM.ui           # Qt Designer interface file
 ├── img/
-│   ├── input/              # 运行时复制输入图像的位置
-│   └── output/             # 运行时生成检测结果的位置
-├── model/                  # 放置预训练权重文件
-└── docs/images/            # README 截图和架构图存放位置
+│   ├── input/              # Runtime location for copied input images
+│   └── output/             # Runtime location for generated result images
+├── model/                  # Location for configured weight files
+└── docs/images/            # README screenshots
 ```
 
-## 环境要求
+## Runtime Requirements
 
-- Python 3.6
-- Windows
-- 可选：兼容的 NVIDIA GPU、CUDA 与 cuDNN 环境
+- Python 3.7 (the accompanying publication specifies Python > 3.6; Python 3.7 is recommended for the TensorFlow 1.x dependency)
+- Windows, Linux, or macOS
+- Optional: a compatible NVIDIA GPU with CUDA and cuDNN
 
-主要依赖包括 TensorFlow、Keras、PyQt5、OpenCV、scikit-image、NumPy、Matplotlib 与 pycocotools；固定版本见 [requirments.txt](requirments.txt)。
+Key dependencies include TensorFlow, Keras, PyQt5, OpenCV, scikit-image, NumPy, Matplotlib, and pycocotools. See [requirments.txt](requirments.txt) for the pinned dependency versions.
 
-## 快速开始
+## Quick Start
 
-从项目根目录启动应用：
+Start the application from the project root:
 
 ```bash
 python main.py
 ```
 
-按以下步骤完成一次检测：
+Complete a detection task as follows:
 
-1. 在 **Select Detection Material** 下拉菜单中选择目标材料。
-2. 点击 **Select Image**，选择待分析的光学显微图像。
-3. 点击 **Detect**，等待模型完成推理。
-4. 在右侧 **Detection Image** 区域查看带标注的结果图；不同颜色用于区分目标区域，标签中显示厚度类别与置信度。
-5. 在右下方 **Detection Results** 区域查看所用权重文件、检测材料以及 Mono / Few / Thick 的数量统计。
-6. 点击 **Save Detection Results**，选择导出目录以保存标注结果图。
+1. Select the target material in the **Select Detection Material** drop-down menu.
+2. Click **Select Image** and choose an optical microscopy image.
+3. Click **Detect** and wait for processing to finish.
+4. Review the annotated result in the **Detection Image** panel. Different colors distinguish target regions, while labels show the thickness category and confidence score.
+5. Review the selected weight file, detected material, and Mono / Few / Thick counts in the **Detection Results** panel.
+6. Click **Save Detection Results** and select an output directory for the annotated image.
 
-所选图像会被复制到 `img/input/`；有检测结果时，程序会先将结果图写入 `img/output/`，随后再由用户选择保存位置。若未选择材料或图像，或没有检测到目标，界面会给出提示。
+The selected image is copied to `img/input/`. When a target is detected, the result image is first written to `img/output/` and can then be saved to the directory selected by the user. The application displays a prompt if no material or image has been selected, or if no target is detected.
 
-| 操作步骤 | 建议图片文件 | 图片说明 |
+| Step | Screenshot file | Description |
 | --- | --- | --- |
-| 上传图像 | `docs/images/step-1-upload.png` | 选择本地显微图像并显示在 Original Image 区域 |
-| 预览图像 | `docs/images/step-2-preview.png` | 原图载入后的界面状态 |
-| 选择材料 | `docs/images/step-3-material.png` | 在下拉菜单选择目标材料 |
-| 准备检测 | `docs/images/step-4-ready.png` | 选择图像后、执行检测前的界面状态 |
-| 执行检测 | `docs/images/step-5-detection.png` | 显示检测框、掩膜、置信度与厚度统计 |
+| Upload an image | `docs/images/step-1-upload.png` | Select a local microscopy image in the file dialog |
+| Preview image | `docs/images/step-2-preview.png` | View the loaded original image |
+| Select material | `docs/images/step-3-material.png` | Choose the target material from the drop-down menu |
+| Ready for detection | `docs/images/step-4-ready.png` | Interface state after image selection and before detection |
+| Run detection | `docs/images/step-5-detection.png` | Detection result, confidence labels, and thickness statistics |
 
-![步骤 1：上传图像](docs/images/step-1-upload.png)
-![步骤 2：预览图像](docs/images/step-2-preview.png)
-![步骤 3：选择材料](docs/images/step-3-material.png)
-![步骤 4：准备检测](docs/images/step-4-ready.png)
-![步骤 5：查看检测结果](docs/images/step-5-detection.png)
+![Step 1: Upload an image](docs/images/step-1-upload.png)
+![Step 2: Preview the image](docs/images/step-2-preview.png)
+![Step 3: Select a material](docs/images/step-3-material.png)
+![Step 4: Ready for detection](docs/images/step-4-ready.png)
+![Step 5: Review the detection result](docs/images/step-5-detection.png)
