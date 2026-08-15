@@ -54,7 +54,7 @@ Deep2DM/
 
 ## Runtime Requirements
 
-- Python 3.7 (the accompanying publication specifies Python > 3.6; Python 3.7 is recommended for the TensorFlow 1.x dependency)
+- Python 3.6
 - Windows, Linux, or macOS
 - Optional: a compatible NVIDIA GPU with CUDA and cuDNN
 
