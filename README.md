@@ -9,7 +9,7 @@ Deep2DM is a graphical detection system built with **Mask R-CNN** and **PyQt5**.
 | Current version | V1.00 |
 | Language | Python |
 | Core components | Mask R-CNN, TensorFlow 1.x, PyQt5 |
-| Repository | <https://github.com/1286250607/2Dmmd> |
+| Repository | <https://github.com/z-maye/Deep2DM.git> |
 | Intended users | 2D-material research, laboratory teaching, and initial microscopy-image screening |
 
 ## Why Deep2DM?
