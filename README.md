@@ -81,8 +81,8 @@ The selected image is copied to `img/input/`. When a target is detected, the res
 
 | Step | Screenshot file | Description |
 | --- | --- | --- |
-| Upload an image | `docs/images/step-1-upload.png` | Select a local microscopy image in the file dialog | | Preview image | `docs/images/step-2-preview.png` | View the loaded original image |
-
+| Upload an image | `docs/images/step-1-upload.png` | Select a local microscopy image in the file dialog |
+| Preview image | `docs/images/step-2-preview.png` | View the loaded original image |
 | Select material | `docs/images/step-3-material.png` | Choose the target material from the drop-down menu |
 | Ready for detection | `docs/images/step-4-ready.png` | Interface state after image selection and before detection |
 | Run detection | `docs/images/step-5-detection.png` | Detection result, confidence labels, and thickness statistics |
